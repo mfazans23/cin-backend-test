@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>API Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    p {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>API Documentation</h1>
+  <p>
+    This API provides endpoints to register a user, login, and access user information.
+  </p>
+
+  <h2>Stack Used</h2>
+  <ul>
+    <li>Express.js</li>
+    <li>TypeScript</li>
+    <li>Sequelize (with MySQL)</li>
+    <li>Bcrypt (for password encryption)</li>
+    <li>JSON Web Tokens (JWT) for authentication</li>
+  </ul>
+
+  <h2>Endpoints</h2>
+  <p>The API has the following endpoints:</p>
+
+  <h3>POST /api/register</h3>
+  <p>
+    Register a new user with the API. Use this endpoint to create a new user account.
+  </p>
+  <p>
+    Request Body:
+    <pre>
+{
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "password": "password123"
+}
+    </pre>
+  </p>
+  <p>
+    Response (Success):
+    <pre>
+{
+  "message": "User registered successfully"
+}
+    </pre>
+  </p>
+  <p>
+    Response (Error):
+    <pre>
+{
+  "message": "User already exists"
+}
+    </pre>
+  </p>
+
+  <h3>POST /api/login</h3>
+  <p>
+    Log in an existing user. Use this endpoint to authenticate a user and get a JSON Web Token (JWT) for further requests.
+  </p>
+  <p>
+    Request Body:
+    <pre>
+{
+  "email": "johndoe@example.com",
+  "password": "password123"
+}
+    </pre>
+  </p>
+  <p>
+    Response (Success):
+    <pre>
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+    </pre>
+  </p>
+  <p>
+    Response (Error):
+    <pre>
+{
+  "message": "Invalid email or password"
+}
+    </pre>
+  </p>
+
+  <h3>GET /api/me</h3>
+  <p>
+    Get user information for the authenticated user. Use this endpoint after obtaining a JWT from the login process to access user-specific data.
+  </p>
+  <p>
+    Request Header:
+    <pre>
+Authorization: Bearer &lt;JWT Token&gt;
+    </pre>
+  </p>
+  <p>
+    Response (Success):
+    <pre>
+{
+  "id": 1,
+  "name": "John Doe",
+  "email": "johndoe@example.com"
+}
+    </pre>
+  </p>
+  <p>
+    Response (Error):
+    <pre>
+{
+  "message": "Authorization denied"
+}
+    </pre>
+  </p>
+</body>
+</html>

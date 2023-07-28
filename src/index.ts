@@ -1,9 +1,10 @@
 import dotenv from 'dotenv'
 dotenv.config()
-import express from 'express'
+import express, { Request, Response } from 'express'
 import bodyParser from 'body-parser'
 import userRoutes from './routes/userRoutes'
 import sequelize from './config/database'
+import path from 'path'
 import { notFoundHandler, errorHandler } from './middlewares/errorMiddleware'
 
 const app = express()
@@ -12,7 +13,16 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')))
+
 // Routes
+app.get('/', (req: Request, res: Response) => {
+  // Send the guide.html file from the "public" directory
+  const filePath = path.join(__dirname, '..', 'public', 'index.html')
+  res.sendFile(filePath)
+})
+
 app.use('/api', userRoutes)
 
 // Error handling middleware
